@@ -1,0 +1,42 @@
+[
+  {
+    "id": "Banka",
+    "image": "../assets/images/city_1.png"
+  },
+  {
+    "id": "Pracovní úřad",
+    "image": "../assets/images/city_2.png"
+  },
+  {
+    "id": "Muzeum",
+    "image": "../assets/images/city_3.png"
+  },
+  {
+    "id": "Zpracovna ryb",
+    "image": "../assets/images/city_4.png"
+  },
+  {
+    "id": "Farma",
+    "image": "../assets/images/city_5.png"
+  },
+  {
+    "id": "Spořící kancelář",
+    "image": "../assets/images/city_6.png"
+  },
+  {
+    "id": "Policejní stanice",
+    "image": "../assets/images/city_7.png"
+  },
+  {
+    "id": "Povrchový důl",
+    "image": "../assets/images/city_8.png"
+  },
+  {
+    "id": "Centrum",
+    "image": "../assets/images/city_9.png"
+  },
+  {
+    "id": "Univerzita",
+    "image": "../assets/images/city_10.png"
+  }
+]

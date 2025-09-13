@@ -1,0 +1,65 @@
+---
+import X from '../assets/images/x.svg'
+---
+<dialog id="instructions" closedby="any" class="fixed inset-0 bg-gol-surface-0 m-auto z-50 p-6 md:p-12 rounded-xl w-full max-w-[95%] md:max-w-2xl">
+  <form method="dialog" class="flex gap-6 flex-col">
+    <h2 class="text-2xl flex justify-between items-center gap-4">
+      <span>Jak se připojit na Game of Life?</span>
+      <button onclick="this.closest('dialog').close('close')" aria-label="Close" class="gol-btn rounded-full !p-0 flex items-center justify-center h-10 w-10 cursor-pointer">
+        <X class="scale-75 opacity-75" width="32" height="32" />
+      </button>
+    </h2>
+    <div class="flex flex-col gap-4">
+      <div class="gol-body-text"/>
+        <p>Game of Life je aktuálně dostupný pouze pro Minecraft: Java edici.</p>
+        <ol class="list-decimal pl-5">
+          <li>Zapněte Minecraft: Java Edition.</li>
+          <li>Klikněte na "Hra více hráčů", poté "Přidat server".</li>
+          <li>Zkopírujte a vložte "golmc.cz" do pole "Adresa serveru".</li>
+        </ol>
+        <a id="instructions-address" class="gol-btn mt-5 cursor-copy">Zkopírovat Adresu (golmc.cz)</a>
+    </div>
+  </form>
+</dialog>
+<script>
+const address = document.getElementById('instructions-address');
+if (address) {
+  address.addEventListener('click', () => {
+    navigator.clipboard.writeText('golmc.cz');
+    address.innerText = 'Zkopírováno! Nyní vložte do hry.';
+    address.classList.remove('cursor-copy');
+    address.classList.add('!bg-green-600', 'cursor-none');
+    setTimeout(() => {
+      address.innerText = 'Zkopírovat Adresu (golmc.cz)';
+      address.classList.remove('!bg-green-600', 'cursor-none');
+      address.classList.add('cursor-copy');
+    }, 2000);
+  });
+}
+</script>
+<style>
+html:has(dialog[open]) {
+  overflow: hidden;
+  backdrop-filter: blur(0);
+  scrollbar-gutter: stable;
+}
+dialog[open]::backdrop {
+  backdrop-filter: blur(50px);
+}
+@keyframes scale-up {
+  to {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  dialog {
+    translate: 0 2rem;
+    scale: .8
+  }
+  dialog[open] {
+    animation: scale-up forwards 1s;
+    animation-timing-function: var(--ease-gol-spring);
+  }
+}
+</style>

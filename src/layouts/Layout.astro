@@ -1,0 +1,19 @@
+---
+import Base from "../components/Base.astro"
+import HeaderMain from "../components/HeaderMain.astro"
+import FooterMain from "../components/FooterMain.astro"
+import JoinInstructions from "../components/JoinInstructions.astro"
+import MobileNavigation from "../components/MobileNavigation.astro"
+import links from "../data/links.json"
+const {title} = Astro.props
+---
+<html lang="en">
+  <Base title={title}/>
+  <body>
+    <HeaderMain links={links}/>
+    <main><slot/></main>
+    <FooterMain links={links}/>
+    <JoinInstructions/>
+    <MobileNavigation links={links}/>
+  </body>
+</html>

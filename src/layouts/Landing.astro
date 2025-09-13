@@ -1,0 +1,24 @@
+---
+import "../assets/css/global.css"
+import Base from "../components/Base.astro"
+import HeaderMain from "../components/HeaderMain.astro"
+import FooterMain from "../components/FooterMain.astro"
+import JoinInstructions from "../components/JoinInstructions.astro"
+import MobileNavigation from "../components/MobileNavigation.astro"
+import links from "../data/links.json"
+const {title} = Astro.props
+// landing page specific elements
+import {Image} from 'astro:assets';
+import background from "../assets/images/background.png"
+---
+<html lang="en">
+  <Base title={title}/>
+  <body>
+    <Image src={background} alt="" class="absolute min-h-svh object-cover inset-0 bottom-auto -z-1 w-full h-auto opacity-20 mask-b-from-50%" loading="eager"/>
+    <HeaderMain links={links}/>
+    <main><slot/></main>
+    <FooterMain links={links}/>
+    <JoinInstructions/>
+    <MobileNavigation links={links}/>
+  </body>
+</html>

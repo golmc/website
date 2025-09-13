@@ -1,0 +1,25 @@
+---
+import Logo from '../assets/images/logo.svg'
+const {links} = Astro.props
+---
+<footer class="@container gol-container mt-24 mb-16 font-semibold text-gol-foreground-dark [&_a]:hover:text-gol-foreground-light [&_a]:transition-color [&_a]:duration-150" id="contact">
+  <div class="bg-gol-surface-2 p-6 md:p-16 rounded-xl grid md:grid-cols-2 gap-8">
+    <div class="w-full flex flex-col gap-8 md:gap-0 justify-between text-gol-foreground-light">
+      <Logo class="hover:-rotate-360 hover:scale-120 transition-transform ease-gol-spring duration-1000" height="48" width="48"/>
+      <h2 class="gol-h3">Game of Life</h2>
+      <p class="text-sm wrap-anywhere">Nejedná se o oficiální Minecraft produkt.<br>Není schváleno společností Mojang či Microsoft.</p>
+    </div>
+    <div class="flex gap-10 md:gap-2 lg:gap-20 justify-center md:justify-end [&_a]:block md:[&_a]:px-5 [&_a]:py-2">
+      <nav class="flex flex-col">{links.nav.map( item => <a href={item.link}>{item.title}</a>)}</nav>
+      <nav class="flex flex-col">{links.social_links.map( item => <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}</a>)}</nav>
+    </div>
+  </div>
+  <aside class="gol-container">
+    <nav class="flex gap-4 justify-center pt-8 md:pt-16 text-sm">
+      <a href="https://github.com/golmc/website" target="_blank" rel="noopener noreferrer">Kód této stránky je veřejně dostupný pod MIT licensí.</a>
+    </nav>
+    <nav class="flex gap-4 justify-center text-sm">
+      <a href="https://golmc.cz" target="_blank" rel="noopener noreferrer">© 2025 Game of Life</a>
+    </nav>
+  </aside>
+</footer>

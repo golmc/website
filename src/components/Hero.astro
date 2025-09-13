@@ -1,0 +1,73 @@
+---
+import Image from "astro/components/Image.astro"
+import logo from "../assets/images/logo.png"
+import discord from "../assets/images/discord.png"
+import map from "../assets/images/map.png"
+import server from "../assets/images/server.png"
+---
+<section class="gol-container">
+  <div class="max-w-xl mt-10 md:mt-24 mx-auto">
+    <Image src={logo} alt="Game of Life" class="rounded-lg" loading="eager"/>
+    <div class="gol-body-text md:text-lg mt-5 text-center">Moderní simulátor života v Minecraftu.<br>Vytvořeno ve spolupráci s Českou Spořitelnou.<br>Aktuálně pouze pro oficiální Minecraft: Java edici.</div>
+  </div>
+  <div class="max-w-4xl w-fit rounded-lg bg-gray-300/50 mt-10 md:mt-15 flex flex-col lg:flex-row mx-auto p-3 gap-3 justify-center">
+    <button class="max-w-70 min-w-70 flex flex-col align-top bg-gray-700 px-5 py-3 rounded-lg shadow-xl transition-all duration-200 hover:scale-95 cursor-help text-left" onclick="instructions.showModal()">
+      <div class="flex items-center gap-3 mb-2">
+        <Image src={server} alt="" class="max-w-7" loading="eager"/>
+        <div class="text-white font-semibold uppercase text-sm">Minecraft Server</div>
+      </div>
+      Zahrajte si hru v Minecraftu! (golmc.cz)<br><span class="font-semibold">Online: <span id="server-online">...</span> | Celkem: <span id="server-total">...</span></span>
+    </button>
+    <a class="max-w-70 min-w-70 flex flex-col align-top bg-[#5865F2] px-5 py-3 rounded-lg shadow-xl transition-all duration-200 hover:scale-95 cursor-alias" href="https://discord.golmc.cz" target="_blank" rel="noopener noreferrer">
+      <div class="flex items-center gap-3 mb-2">
+        <Image src={discord} alt="" class="max-w-10" loading="eager"/>
+        <div class="text-white font-semibold uppercase text-sm">Oficiální Discord</div>
+      </div>
+      Poznejte ostatní hráče! (discord.golmc.cz)<br><span class="font-semibold">Online: <span id="discord-online">...</span> | Celkem: <span id="discord-total">...</span></span>
+    </a>
+    <!-- href="https://map.golmc.cz" target="_blank" rel="noopener noreferrer" -->
+    <button class="max-w-70 min-w-70 flex flex-col align-top bg-amber-700 px-5 py-3 rounded-lg shadow-xl transition-all duration-200 hover:scale-95 cursor-not-allowed text-left">
+      <div class="flex items-center gap-3 mb-2 top-0">
+        <Image src={map} alt="" class="max-w-7" loading="eager"/>
+        <div class="text-white font-semibold uppercase text-sm">Interaktivní Mapa</div>
+      </div>
+      <!-- Podívejte se na mapu celého města! -->
+      Bude dostupná již brzy!
+    </button>
+  </div>
+</section>
+<script>
+const discordData = await(await fetch('https://discord.com/api/v10/invites/PfsbUdzgAp?with_counts=true', {method: 'get'})).json();
+let statusData: {players?:any};
+let playerData: {_metadata?:any};
+try {
+  statusData = await(await fetch('https://api.golmc.cz/api/v1/status', {mode:'cors', method:'get'})).json();
+  playerData = await(await fetch('https://api.golmc.cz/api/v1/player', {mode:'cors', method:'get'})).json();
+} catch(err) {
+  statusData = {players:0};
+  playerData = {_metadata:{total:0}};
+}
+function animateCount(element: HTMLElement | null, targetNumber: number) {
+  if (!element) {
+    return;
+  }
+  if (targetNumber === undefined || targetNumber === 0) {
+    element.textContent = "0";
+    return;
+  }
+  const startTime = Date.now();
+  const interval = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    let currentCount = Math.floor((elapsed / 500) * targetNumber);
+    if (elapsed >= 500) {
+      currentCount = targetNumber;
+      clearInterval(interval);
+    }
+    element.textContent = currentCount.toString();
+  }, 20);
+}
+animateCount(document.getElementById('discord-online'), discordData.approximate_presence_count);
+animateCount(document.getElementById('discord-total'), discordData.approximate_member_count);
+animateCount(document.getElementById('server-online'), statusData.players);
+animateCount(document.getElementById('server-total'), playerData._metadata.total);
+</script>

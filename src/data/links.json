@@ -1,0 +1,38 @@
+{
+  "nav": [
+    {
+      "title": "O Hře",
+      "link": "/"
+    },
+    {
+      "title": "Novinky",
+      "link": "/blog"
+    },
+    {
+      "title": "Návody",
+      "link": "/guides"
+    },
+    {
+      "title": "Pravidla",
+      "link": "/rules"
+    }
+  ],
+  "social_links": [
+    {
+      "title": "Discord",
+      "link": "https://discord.golmc.cz"
+    },
+    {
+      "title": "Mapa",
+      "link": "https://map.golmc.cz"
+    },
+    {
+      "title": "Email",
+      "link": "mailto:gameoflife@nvias.org"
+    },
+    {
+      "title": "GitHub",
+      "link": "https://github.com/golmc"
+    }
+  ]
+}

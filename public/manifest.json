@@ -1,0 +1,13 @@
+{
+  "lang": "en",
+  "name": "Game of Life v Minecraftu",
+  "description": "Moderní simulátor života v Minecraftu. Vytvořeno ve spolupráci s Českou Spořitelnou.",
+  "short_name": "golmc",
+  "theme_color": "#00c0ff",
+  "icons": [
+    {"src": "/192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "/512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "/512.png", "sizes": "512x512", "type": "image/png","purpose": "maskable"}
+  ]
+}

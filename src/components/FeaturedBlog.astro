@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const newest = posts[0];
+---
+<section class="gol-container mt-15 pb-10" id="news">
+  <h2 class="gol-h2 text-center md:text-left mb-10">Novinky</h2>
+  <div class="group @container">
+    <article class="relative isolate flex h-full w-full gap-6 overflow-hidden rounded-xl pt-[20rem] @md:pt-[28rem] @xl:justify-end @4xl:pt-0 bg-gradient-to-r from-blue-300 to-blue-700">
+      {newest.data.heroImage && (<Image src={newest.data.heroImage} alt="" loading="lazy" class="drop-shadow-[0_100px_100px_rgba(0,0,0,0.5)] object-cover w-fit h-full absolute top-0 left-0 mx-auto rounded-xl @4xl:w-[60cqi] group-hover:scale-105 transition-transform duration-1000 transform-gpu" />)}
+      <div class="z-10 flex h-full w-full flex-col gap-6 bg-gol-surface-3/75 backdrop-blur-3xl p-6 @4xl:w-1/2 @4xl:p-20">
+        <header class="flex flex-col gap-3">
+          <div class="text-xs tracking-widest font-semibold bg-clip-text">{newest.data.type} | <FormattedDate date={newest.data.pubDate}/></div>
+          <h2 class="gol-h2" set:html={ newest.data.title } />
+        </header>
+      <div class="gol-body-text flex-grow text-balance" set:html={ newest.data.description } />
+        <a href={`/blog/${newest.id}/`} class="gol-btn inline-block self-start @4xl:mt-12">Přečíst si více</a>
+      </div>
+    </article>
+  </div>
+  <a href="/blog/" class="gol-btn mt-10 mx-auto block max-w-xl">Zobrazit všechny novinky</a>
+</section>

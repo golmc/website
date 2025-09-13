@@ -1,0 +1,34 @@
+---
+import Base from "../components/Base.astro"
+import HeaderMain from "../components/HeaderMain.astro"
+import FooterMain from "../components/FooterMain.astro"
+import JoinInstructions from "../components/JoinInstructions.astro"
+import MobileNavigation from "../components/MobileNavigation.astro"
+import links from "../data/links.json"
+const {title} = Astro.props
+// blog specific elements
+import "../assets/css/blog.css"
+import {Image} from 'astro:assets';
+import FormattedDate from '../components/FormattedDate.astro';
+import type {CollectionEntry} from 'astro:content';
+type Props = CollectionEntry<'blog'>['data'];
+const {heroImage, pubDate, type, description} = Astro.props;
+---
+<html lang="en">
+  <Base title={title}/>
+  <body>
+    <HeaderMain links={links}/>
+		<main class="gol-container">
+			{heroImage && <Image src={heroImage} alt="" class="mt-5 mx-auto w-full max-w-5xl rounded-lg"/>}
+			<article class="blog mx-auto max-w-3xl text-lg">
+        <h1 class="text-center pt-10 font-bold">{title}</h1>
+        <h5 class="text-center pt-2 pb-15 text-amber-300">{type}<span class="text-gray-400"> | <FormattedDate date={pubDate}/></span></h5>
+				<p class="pb-5">{description}</p>
+        <slot/>
+			</article>
+		</main>
+    <FooterMain links={links}/>
+    <JoinInstructions/>
+    <MobileNavigation links={links}/>
+  </body>
+</html>

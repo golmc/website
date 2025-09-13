@@ -1,0 +1,12 @@
+---
+import QuestionAnswer from "./QuestionAnswer.astro"
+const { faq } = Astro.props
+---
+<section class="gol-container grid mt-15" id="faq">
+  <h2 class="gol-h2 text-center md:text-left">Časté dotazy</h2>
+  <div class="grid gap-3 mt-6 lg:mt-8">
+    { faq.map( item =>
+      <QuestionAnswer question={item.question} answer={item.answer} />
+    )}
+  </div>
+</section>

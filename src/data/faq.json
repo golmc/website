@@ -1,0 +1,10 @@
+[
+  {
+    "question": "Na jakou verzi Minecraftu je Game of Life server?",
+    "answer": "Na server (golmc.cz) se lze připojit s verzí 1.21.7 a výše. Pokud nevíte přesně jakou verzi vybrat, vždy je nejlepší volbou nejnovější verze."
+  },
+  {
+    "question": "Kde mohu podat požadavky nebo řešit problémy?",
+    "answer": "Pro nahlášení problémů, návrhů, nebo podání obecných žádostí můžete využít náš Discord (discord.golmc.cz) server. Alternativně nám můžete zaslat E-mail na adresu 'gameoflife@nvias.org'."
+  }
+]

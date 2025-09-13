@@ -1,0 +1,14 @@
+---
+import Landing from "../layouts/Landing.astro"
+import FeaturedBlog from "../components/FeaturedBlog.astro"
+import Faq from "../components/Faq.astro"
+import Hero from "../components/Hero.astro"
+import Gallery from "../components/Gallery.astro"
+import faq from "../data/faq.json"
+---
+<Landing title='O Hře'>
+  <Hero/>
+  <FeaturedBlog/>
+  <Gallery/>
+  <Faq faq={faq}/>
+</Landing>

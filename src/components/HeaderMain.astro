@@ -1,0 +1,26 @@
+---
+import Logo from '../assets/images/logo.svg'
+const {links} = Astro.props
+---
+<header class="gol-container py-6 flex justify-between items-center">
+  <Logo class="hover:-rotate-360 hover:scale-120 transition-transform ease-gol-spring duration-1000" height="48" width="48"/>
+  <nav class="hidden col-span-6 sm:flex mx-auto justify-between lg:gap-4">{links.nav.map( item => <a class="gol-btn !bg-transparent before:translate-y-full hover:before:translate-y-0" href={item.link}>{item.title}</a>)}</nav>
+  <button type="button" class="sm:hidden gol-btn !bg-transparent before:translate-y-full hover:before:translate-y-0 min-w-16 cursor-pointer" onclick="navigation.showModal()">Navigace</button>
+  <button id="address" type="button" class="min-w-16 gol-btn cursor-copy">golmc.cz</button>
+</header>
+<script>
+const address = document.getElementById('address');
+if (address) {
+  address.addEventListener('click', () => {
+    navigator.clipboard.writeText('golmc.cz');
+    address.innerText = 'Zkopírováno!';
+    address.classList.remove('cursor-copy');
+    address.classList.add('!bg-green-600', 'cursor-none');
+    setTimeout(() => {
+      address.innerText = 'golmc.cz';
+      address.classList.remove('!bg-green-600', 'cursor-none');
+      address.classList.add('cursor-copy');
+    }, 1000);
+  });
+}
+</script>

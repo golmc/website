@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets'
+import Arrow from '../assets/images/arrow.svg'
+import { getCollection } from 'astro:content';
+const gallery = await getCollection('gallery')
+---
+<section id="gallery">
+  <header class="gol-container flex items-center justify-between pt-10">
+    <h2 class="gol-h2">Galerie</h2>
+    <nav class="button-wrapper flex justify-center gap-4">
+      <button aria-label="Minulý obrázek" id="previous" class="group gol-btn rounded-full !p-0 flex items-center justify-center h-10 w-10 md:h-12 md:w-12 cursor-pointer">
+        <Arrow class="h-4 w-4 -translate-x-[2px] group-active:translate-y-[1px]" height="16" width="25" />
+      </button>
+      <button aria-label="Další obrázek" id="next" class="group gol-btn rounded-full !p-0 flex items-center justify-center h-10 w-10 md:h-12 md:w-12 -scale-x-100 cursor-pointer">
+        <Arrow class="h-4 w-4 -translate-x-[2px] group-active:translate-y-[1px]" height="16" width="25" />
+      </button>
+    </nav>
+  </header>
+  <div class="swiper mt-10">
+    <div class="swiper-wrapper cursor-grab">
+      {gallery.map((item) => (
+        <div class="swiper-slide bg-gol-surface-0 border-4 border-gol-surface-3 rounded-2xl overflow-hidden !h-auto">
+          <figure class="flex flex-col gap-6 isolate min-h-[50svh] md:min-h-[40rem] h-full">
+            {item.data.image && (<Image src={item.data.image} alt="" loading="lazy" class="opacity-80 rounded-xl overflow-hidden w-full h-full object-cover object-left absolute inset-0"/>)}
+            <h2 class="gol-h2 z-10 p-6 sm:p-10 md:p-20 max-w-xl flex flex-col gap-6 h-full" set:html={item.data.id}/>
+          </figure>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<script>
+import Swiper from "swiper"
+import 'swiper/css'
+const swiper = new Swiper('.swiper', {
+  slidesPerView: 1.05,
+  spaceBetween: 8,
+  speed: 500,
+  loop: true,
+  centeredSlides: true,
+  breakpoints: {
+    '640': {slidesPerView: 1.2, spaceBetween: 32,},
+    '1600': {slidesPerView: 1.4, spaceBetween: 64,},
+    '1900': {slidesPerView: 1.6, spaceBetween: 64,}
+  }
+})
+const previous = document.getElementById('previous')
+if (previous) {
+  previous.addEventListener('click', () => swiper.slidePrev())
+}
+const next = document.getElementById('next')
+if (next) {
+  next.addEventListener('click', () => swiper.slideNext())
+}
+swiper.init?.()
+</script>
