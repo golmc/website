@@ -38,13 +38,13 @@ import server from "../assets/images/server.png"
 </section>
 <script>
 const discordData = await(await fetch('https://discord.com/api/v10/invites/PfsbUdzgAp?with_counts=true', {method: 'get'})).json();
-let statusData: {players?:any};
+let statusData: {status?:any};
 let playerData: {_metadata?:any};
 try {
   statusData = await(await fetch('https://api.golmc.cz/api/v1/status', {mode:'cors', method:'get'})).json();
   playerData = await(await fetch('https://api.golmc.cz/api/v1/player', {mode:'cors', method:'get'})).json();
 } catch(err) {
-  statusData = {players:0};
+  statusData = {status:{players:{online:0}}};
   playerData = {_metadata:{total:0}};
 }
 function animateCount(element: HTMLElement | null, targetNumber: number) {
@@ -68,6 +68,6 @@ function animateCount(element: HTMLElement | null, targetNumber: number) {
 }
 animateCount(document.getElementById('discord-online'), discordData.approximate_presence_count);
 animateCount(document.getElementById('discord-total'), discordData.approximate_member_count);
-animateCount(document.getElementById('server-online'), statusData.players);
+animateCount(document.getElementById('server-online'), statusData.status.players.online);
 animateCount(document.getElementById('server-total'), playerData._metadata.total);
 </script>
